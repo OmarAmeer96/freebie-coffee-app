@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:freebie_coffee_app/screens/get_started_screen.dart';
+import 'package:freebie_coffee_app/screens/onboarding_screen.dart';
+import 'package:freebie_coffee_app/screens/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,8 +12,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Freebie Coffee App',
+      debugShowCheckedModeBanner: false,
+      routes: {
+        SplashScreen.id: (context) => const SplashScreen(),
+        GetStarted.id: (context) => const GetStarted(),
+        OnBoarding.id: (context) => OnBoarding(),
+      },
+      initialRoute: SplashScreen.id,
     );
   }
 }
