@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:freebie_coffee_app/screens/get_started_screen.dart';
 import 'package:freebie_coffee_app/screens/onboarding_screen.dart';
 import 'package:freebie_coffee_app/screens/signin_screen.dart';
+import 'package:freebie_coffee_app/screens/signup_screen.dart';
 import 'package:freebie_coffee_app/screens/splash_screen.dart';
 
 void main() {
@@ -20,7 +21,8 @@ class MyApp extends StatelessWidget {
         SplashScreen.id: (context) => const SplashScreen(),
         GetStarted.id: (context) => const GetStarted(),
         OnBoarding.id: (context) => OnBoarding(),
-        SigninScreen.id: (context) => const SigninScreen(),
+        SignInScreen.id: (context) => const SignInScreen(),
+        SignUpScreen.id: (context) => const SignUpScreen(),
       },
       initialRoute: SplashScreen.id,
     );

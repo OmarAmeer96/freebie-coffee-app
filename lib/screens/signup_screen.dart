@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:freebie_coffee_app/screens/signup_screen.dart';
 import 'package:freebie_coffee_app/widgets/custom_email_textfiled.dart';
 import 'package:freebie_coffee_app/widgets/custom_password_textfield.dart';
 import 'package:freebie_coffee_app/widgets/signin_up_button.dart';
 import 'dart:ui';
 import '../widgets/custom_app_logo.dart';
 
-class SignInScreen extends StatelessWidget {
-  const SignInScreen({Key? key}) : super(key: key);
+class SignUpScreen extends StatelessWidget {
+  const SignUpScreen({Key? key}) : super(key: key);
 
-  static String id = 'SignInScreen';
+  static String id = 'SignUpScreen';
 
   @override
   Widget build(BuildContext context) {
@@ -42,14 +41,14 @@ class SignInScreen extends StatelessWidget {
               child: Column(
                 children: [
                   const SizedBox(
-                    height: 75,
+                    height: 55,
                   ),
                   const CustomAppLogo(),
                   const SizedBox(
-                    height: 75,
+                    height: 45,
                   ),
                   const Text(
-                    "Sign In",
+                    "Sign Up",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 49,
@@ -61,7 +60,7 @@ class SignInScreen extends StatelessWidget {
                     height: 10,
                   ),
                   const Text(
-                    "We’ve already met!",
+                    "Let’s create you an account.",
                     style: TextStyle(
                       color: Color(0xffbbb9b8),
                       fontSize: 18,
@@ -70,9 +69,10 @@ class SignInScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(
-                    height: 90,
+                    height: 75,
                   ),
                   const CustomEmailTextField(),
+                  const CustomPasswordTextField(),
                   const CustomPasswordTextField(),
                   const Text(
                     "Forgot password?",
@@ -87,8 +87,8 @@ class SignInScreen extends StatelessWidget {
                     height: 90,
                   ),
                   const SignInUpButton(
-                    text: 'Sign In',
-                    width: 110,
+                    text: 'Sign Up',
+                    width: 104,
                   ),
                   const SizedBox(
                     height: 20,
@@ -97,7 +97,7 @@ class SignInScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
-                        "Don't have an account?  ",
+                        "Already have an account?  ",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 15,
@@ -106,10 +106,10 @@ class SignInScreen extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          Navigator.pushNamed(context, SignUpScreen.id);
+                          Navigator.pop(context);
                         },
                         child: const Text(
-                          "Sign Up",
+                          "Sign In",
                           style: TextStyle(
                             color: Color(0xffA97C37),
                             fontSize: 17,

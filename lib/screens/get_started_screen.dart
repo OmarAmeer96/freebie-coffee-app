@@ -69,7 +69,7 @@ class GetStarted extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.pushNamed(context, SigninScreen.id);
+                    Navigator.pushNamed(context, SignInScreen.id);
                   },
                   child: const CustomButton(),
                 ),
