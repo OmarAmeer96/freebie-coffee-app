@@ -22,6 +22,39 @@ class SignInScreen extends StatelessWidget {
 
   final _passwordController = TextEditingController();
 
+  bool isValidEmail(String email) {
+    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+    return emailRegex.hasMatch(email);
+  }
+
+  void showSnackBar(BuildContext context, String text) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        elevation: 5,
+        showCloseIcon: true,
+        closeIconColor: Colors.white,
+        content: Text(text),
+      ),
+    );
+  }
+
+  void _resetPassword(BuildContext context) async {
+    final String email = _emailController.text.trim();
+
+    if (email.isEmpty) {
+      showSnackBar(context, "Please enter your email address.");
+      return;
+    }
+
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      // ignore: use_build_context_synchronously
+      showSnackBar(context, "Password reset link sent to your email.");
+    } catch (e) {
+      showSnackBar(context, "Failed to send reset link. Please try again.");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     const Color filterColor = Color(0x80110e0c);
@@ -120,13 +153,18 @@ class SignInScreen extends StatelessWidget {
                     const SizedBox(
                       height: 15,
                     ),
-                    const Text(
-                      "Forgot password?",
-                      style: TextStyle(
-                        color: Color(0xffA97C37),
-                        fontSize: 17,
-                        decoration: TextDecoration.underline,
-                        fontFamily: "Gilroy-Bold",
+                    InkWell(
+                      onTap: () {
+                        _resetPassword(context);
+                      },
+                      child: const Text(
+                        "Forgot password?",
+                        style: TextStyle(
+                          color: Color(0xffA97C37),
+                          fontSize: 17,
+                          decoration: TextDecoration.underline,
+                          fontFamily: "Gilroy-Bold",
+                        ),
                       ),
                     ),
                     const SizedBox(
@@ -143,8 +181,7 @@ class SignInScreen extends StatelessWidget {
                               password: password!,
                             );
                             // ignore: use_build_context_synchronously
-                            showSnackBar(
-                                context, "Your account successfully created.");
+                            showSnackBar(context, "Successfully signed in.");
                             // ignore: use_build_context_synchronously
                             Navigator.pushNamed(context, HomeScreen.id);
                           } on FirebaseAuthException catch (e) {
@@ -205,20 +242,4 @@ class SignInScreen extends StatelessWidget {
       ),
     );
   }
-}
-
-bool isValidEmail(String email) {
-  final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-  return emailRegex.hasMatch(email);
-}
-
-void showSnackBar(BuildContext context, String text) {
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      elevation: 5,
-      showCloseIcon: true,
-      closeIconColor: Colors.white,
-      content: Text(text),
-    ),
-  );
 }
