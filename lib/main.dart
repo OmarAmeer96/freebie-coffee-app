@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:freebie_coffee_app/screens/get_started_screen.dart';
+import 'package:freebie_coffee_app/screens/home_screen.dart';
 import 'package:freebie_coffee_app/screens/onboarding_screen.dart';
 import 'package:freebie_coffee_app/screens/signin_screen.dart';
 import 'package:freebie_coffee_app/screens/signup_screen.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         OnBoarding.id: (context) => OnBoarding(),
         SignInScreen.id: (context) => const SignInScreen(),
         SignUpScreen.id: (context) => SignUpScreen(),
+        HomeScreen.id: (context) => const HomeScreen(),
       },
       initialRoute: SplashScreen.id,
     );

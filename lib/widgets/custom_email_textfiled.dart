@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 
 class CustomEmailTextField extends StatelessWidget {
-  const CustomEmailTextField({super.key, required this.onChanged});
+  const CustomEmailTextField({
+    Key? key,
+    required this.onChanged,
+    required this.controller,
+    required this.validator,
+  }) : super(key: key);
 
   final Function(String) onChanged;
+  final TextEditingController controller;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      controller: controller,
       onChanged: onChanged,
       enabled: true,
       style: const TextStyle(
@@ -32,20 +40,28 @@ class CustomEmailTextField extends StatelessWidget {
           color: Colors.white,
           fontFamily: 'Gilroy-Medium',
         ),
-        border: const OutlineInputBorder(),
-        focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Color(0xff55433c), width: 2.5),
+        border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
+          borderSide: const BorderSide(color: Color(0xff55433c), width: 1.0),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: const BorderSide(color: Color(0xff55433c), width: 2.5),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: const BorderSide(color: Colors.red, width: 1.0),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Color(0xff55433c), width: 1.0),
           borderRadius: BorderRadius.circular(15),
+          borderSide: const BorderSide(color: Color(0xff55433c), width: 1.0),
         ),
         prefixIcon: const Icon(
           Icons.email_outlined,
           color: Colors.white,
         ),
       ),
+      validator: validator,
     );
   }
 }
