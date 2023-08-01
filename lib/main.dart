@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:freebie_coffee_app/screens/get_started_screen.dart';
 import 'package:freebie_coffee_app/screens/onboarding_screen.dart';
@@ -5,7 +6,13 @@ import 'package:freebie_coffee_app/screens/signin_screen.dart';
 import 'package:freebie_coffee_app/screens/signup_screen.dart';
 import 'package:freebie_coffee_app/screens/splash_screen.dart';
 
-void main() {
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 

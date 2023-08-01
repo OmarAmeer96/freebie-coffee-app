@@ -74,21 +74,14 @@ class SignUpScreen extends StatelessWidget {
                   const CustomEmailTextField(),
                   const CustomPasswordTextField(),
                   const CustomPasswordTextField(),
-                  const Text(
-                    "Forgot password?",
-                    style: TextStyle(
-                      color: Color(0xffA97C37),
-                      fontSize: 17,
-                      decoration: TextDecoration.underline,
-                      fontFamily: "Gilroy-Medium",
-                    ),
-                  ),
                   const SizedBox(
-                    height: 90,
+                    height: 110,
                   ),
-                  const SignInUpButton(
+                  SignInUpButton(
+                    onTap: () {},
                     text: 'Sign Up',
-                    width: 104,
+                    width1: 104,
+                    width2: 140,
                   ),
                   const SizedBox(
                     height: 20,

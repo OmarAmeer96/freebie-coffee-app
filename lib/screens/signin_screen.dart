@@ -80,15 +80,17 @@ class SignInScreen extends StatelessWidget {
                       color: Color(0xffA97C37),
                       fontSize: 17,
                       decoration: TextDecoration.underline,
-                      fontFamily: "Gilroy-Medium",
+                      fontFamily: "Gilroy-Bold",
                     ),
                   ),
                   const SizedBox(
                     height: 90,
                   ),
-                  const SignInUpButton(
+                  SignInUpButton(
+                    onTap: () {},
                     text: 'Sign In',
-                    width: 110,
+                    width1: 110,
+                    width2: 146,
                   ),
                   const SizedBox(
                     height: 20,

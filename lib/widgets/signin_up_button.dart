@@ -2,42 +2,53 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class SignInUpButton extends StatelessWidget {
-  const SignInUpButton({super.key, required this.text, required this.width});
+  const SignInUpButton(
+      {super.key,
+      required this.text,
+      required this.width1,
+      required this.onTap, required this.width2});
 
   final String text;
-  final double width;
+  final double width1;
+  final double width2;
+  final Function onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 55,
-      decoration: const BoxDecoration(
-        color: Color(0xff55433C),
-        borderRadius: BorderRadius.all(Radius.circular(15)),
-      ),
-      child: Row(
-        children: [
-          const SizedBox(
-            width: 146,
-          ),
-          Text(
-            text,
-            style: const TextStyle(
-              fontFamily: 'Gilroy-Bold',
-              color: Colors.white,
-              fontSize: 21,
+    return InkWell(
+      onTap: () {
+        onTap;
+      },
+      child: Container(
+        width: double.infinity,
+        height: 55,
+        decoration: const BoxDecoration(
+          color: Color(0xff55433C),
+          borderRadius: BorderRadius.all(Radius.circular(15)),
+        ),
+        child: Row(
+          children: [
+            SizedBox(
+              width: width2,
             ),
-          ),
-          SizedBox(
-            width: width,
-          ),
-          SvgPicture.asset(
-            'assets/svg/arrow_forward.svg',
-            width: 22,
-            height: 21,
-          ),
-        ],
+            Text(
+              text,
+              style: const TextStyle(
+                fontFamily: 'Gilroy-Bold',
+                color: Colors.white,
+                fontSize: 21,
+              ),
+            ),
+            SizedBox(
+              width: width1,
+            ),
+            SvgPicture.asset(
+              'assets/svg/arrow_forward.svg',
+              width: 22,
+              height: 21,
+            ),
+          ],
+        ),
       ),
     );
   }
