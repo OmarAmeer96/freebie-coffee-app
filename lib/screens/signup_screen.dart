@@ -7,19 +7,31 @@ import 'package:freebie_coffee_app/widgets/custom_email_textfiled.dart';
 import 'package:freebie_coffee_app/widgets/custom_password_textfield.dart';
 import 'package:freebie_coffee_app/widgets/signin_up_button.dart';
 
-class SignUpScreen extends StatelessWidget {
-  SignUpScreen({Key? key}) : super(key: key);
+// ignore: must_be_immutable
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({Key? key}) : super(key: key);
 
   static String id = 'SignUpScreen';
+
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
   String? email;
+
   String? password;
+
   String? rePassword;
 
   final _emailController = TextEditingController();
+
   final _passwordController = TextEditingController();
+
   final _rePasswordController = TextEditingController();
-  final _form =
-      GlobalKey<FormState>(); // Updated to use FormState for validation
+
+  final _form = GlobalKey<FormState>();
+  // Updated to use FormState for validation
 
   @override
   Widget build(BuildContext context) {
@@ -144,7 +156,6 @@ class SignUpScreen extends StatelessWidget {
                         InkWell(
                           onTap: () async {
                             if (_form.currentState!.validate()) {
-                              // Form is valid, proceed with sign-up
                               try {
                                 // ignore: unused_local_variable
                                 UserCredential user = await FirebaseAuth
