@@ -29,6 +29,13 @@
             {
               "client_id": "1017834612507-647gavs09ddrb5ectndlqiglpoeruv0b.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1017834612507-mpkrp8jnbura2v3rrm9oupm1tomciu5q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.freebieCoffeeApp.RunnerTests"
+              }
             }
           ]
         }

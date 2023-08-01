@@ -72,8 +72,10 @@ class SignInScreen extends StatelessWidget {
                   const SizedBox(
                     height: 90,
                   ),
-                  const CustomEmailTextField(),
-                  const CustomPasswordTextField(),
+                  // const CustomEmailTextField(),
+                  // const CustomPasswordTextField(
+                  //   text: "PASSWORD",
+                  // ),
                   const Text(
                     "Forgot password?",
                     style: TextStyle(
@@ -86,8 +88,7 @@ class SignInScreen extends StatelessWidget {
                   const SizedBox(
                     height: 90,
                   ),
-                  SignInUpButton(
-                    onTap: () {},
+                  const SignInUpButton(
                     text: 'Sign In',
                     width1: 110,
                     width2: 146,

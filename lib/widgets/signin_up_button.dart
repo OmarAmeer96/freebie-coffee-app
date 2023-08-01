@@ -6,49 +6,43 @@ class SignInUpButton extends StatelessWidget {
       {super.key,
       required this.text,
       required this.width1,
-      required this.onTap, required this.width2});
+      required this.width2});
 
   final String text;
   final double width1;
   final double width2;
-  final Function onTap;
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        onTap;
-      },
-      child: Container(
-        width: double.infinity,
-        height: 55,
-        decoration: const BoxDecoration(
-          color: Color(0xff55433C),
-          borderRadius: BorderRadius.all(Radius.circular(15)),
-        ),
-        child: Row(
-          children: [
-            SizedBox(
-              width: width2,
+    return Container(
+      width: double.infinity,
+      height: 55,
+      decoration: const BoxDecoration(
+        color: Color(0xff55433C),
+        borderRadius: BorderRadius.all(Radius.circular(15)),
+      ),
+      child: Row(
+        children: [
+          SizedBox(
+            width: width2,
+          ),
+          Text(
+            text,
+            style: const TextStyle(
+              fontFamily: 'Gilroy-Bold',
+              color: Colors.white,
+              fontSize: 21,
             ),
-            Text(
-              text,
-              style: const TextStyle(
-                fontFamily: 'Gilroy-Bold',
-                color: Colors.white,
-                fontSize: 21,
-              ),
-            ),
-            SizedBox(
-              width: width1,
-            ),
-            SvgPicture.asset(
-              'assets/svg/arrow_forward.svg',
-              width: 22,
-              height: 21,
-            ),
-          ],
-        ),
+          ),
+          SizedBox(
+            width: width1,
+          ),
+          SvgPicture.asset(
+            'assets/svg/arrow_forward.svg',
+            width: 22,
+            height: 21,
+          ),
+        ],
       ),
     );
   }

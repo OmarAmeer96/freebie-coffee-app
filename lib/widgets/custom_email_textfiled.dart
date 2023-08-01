@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
 class CustomEmailTextField extends StatelessWidget {
-  const CustomEmailTextField({super.key});
+  const CustomEmailTextField({super.key, required this.onChanged});
+
+  final Function(String) onChanged;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      onChanged: onChanged,
       enabled: true,
       style: const TextStyle(
         color: Colors.white,

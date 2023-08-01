@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 
 class CustomPasswordTextField extends StatelessWidget {
-  const CustomPasswordTextField({super.key});
+  const CustomPasswordTextField(
+      {super.key, required this.text, required this.onChanged});
+
+  final String text;
+  final Function(String) onChanged;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      onChanged: onChanged,
       enabled: true,
       style: const TextStyle(
         color: Colors.white,
@@ -24,7 +29,7 @@ class CustomPasswordTextField extends StatelessWidget {
           maxWidth: double.infinity,
           minWidth: double.infinity,
         ),
-        labelText: 'PASSWORD',
+        labelText: text,
         labelStyle: const TextStyle(
           color: Colors.white,
           fontFamily: 'Gilroy-Medium',
@@ -39,7 +44,7 @@ class CustomPasswordTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(15),
         ),
         prefixIcon: const Icon(
-          Icons.password_outlined,
+          Icons.fingerprint,
           color: Colors.white,
         ),
         suffixIcon: const Icon(

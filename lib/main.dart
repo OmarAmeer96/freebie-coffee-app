@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         GetStarted.id: (context) => const GetStarted(),
         OnBoarding.id: (context) => OnBoarding(),
         SignInScreen.id: (context) => const SignInScreen(),
-        SignUpScreen.id: (context) => const SignUpScreen(),
+        SignUpScreen.id: (context) => SignUpScreen(),
       },
       initialRoute: SplashScreen.id,
     );

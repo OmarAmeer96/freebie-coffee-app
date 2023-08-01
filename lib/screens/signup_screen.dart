@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:freebie_coffee_app/widgets/custom_email_textfiled.dart';
 import 'package:freebie_coffee_app/widgets/custom_password_textfield.dart';
@@ -5,10 +6,14 @@ import 'package:freebie_coffee_app/widgets/signin_up_button.dart';
 import 'dart:ui';
 import '../widgets/custom_app_logo.dart';
 
+// ignore: must_be_immutable
 class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({Key? key}) : super(key: key);
+  SignUpScreen({Key? key}) : super(key: key);
 
   static String id = 'SignUpScreen';
+  String? email;
+  String? password;
+  String? rePassword;
 
   @override
   Widget build(BuildContext context) {
@@ -71,17 +76,55 @@ class SignUpScreen extends StatelessWidget {
                   const SizedBox(
                     height: 75,
                   ),
-                  const CustomEmailTextField(),
-                  const CustomPasswordTextField(),
-                  const CustomPasswordTextField(),
+                  CustomEmailTextField(
+                    onChanged: (data) {
+                      email = data;
+                    },
+                  ),
+                  CustomPasswordTextField(
+                    text: "PASSWORD",
+                    onChanged: (data) {
+                      password = data;
+                    },
+                  ),
+                  CustomPasswordTextField(
+                    text: "RE-PASSWORD",
+                    onChanged: (data) {
+                      rePassword = data;
+                    },
+                  ),
                   const SizedBox(
                     height: 110,
                   ),
-                  SignInUpButton(
-                    onTap: () {},
-                    text: 'Sign Up',
-                    width1: 104,
-                    width2: 140,
+                  InkWell(
+                    onTap: () async {
+                      try {
+                        // ignore: unused_local_variable
+                        UserCredential user = await FirebaseAuth.instance
+                            .createUserWithEmailAndPassword(
+                          email: email!,
+                          password: password!,
+                        );
+                        // ignore: use_build_context_synchronously
+                        showSnackBar(
+                            context, "Your account successfully created.");
+                      } on FirebaseAuthException catch (e) {
+                        if (e.code == 'weak-password') {
+                          showSnackBar(
+                              context, "The password provided is too weak.");
+                        } else if (e.code == 'email-already-in-use') {
+                          showSnackBar(context,
+                              "The account already exists for that email.");
+                        }
+                      } catch (e) {
+                        showSnackBar(context, e.toString());
+                      }
+                    },
+                    child: const SignInUpButton(
+                      text: 'Sign Up',
+                      width1: 104,
+                      width2: 140,
+                    ),
                   ),
                   const SizedBox(
                     height: 20,
@@ -121,4 +164,15 @@ class SignUpScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+void showSnackBar(BuildContext context, String text) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      elevation: 5,
+      showCloseIcon: true,
+      closeIconColor: Colors.white,
+      content: Text(text),
+    ),
+  );
 }
