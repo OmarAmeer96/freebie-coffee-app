@@ -7,7 +7,7 @@ import 'package:flutter_svg/svg.dart';
 class NavigationDrawer extends StatelessWidget {
   final List<Widget> children;
 
-  const NavigationDrawer({super.key, required this.children});
+  const NavigationDrawer({Key? key, required this.children}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,6 @@ class HomeScreen extends StatefulWidget {
   static String id = "HomeScreen";
 
   @override
-  // ignore: library_private_types_in_public_api
   _HomeScreenState createState() => _HomeScreenState();
 }
 
@@ -149,22 +148,27 @@ class _HomeScreenState extends State<HomeScreen> {
                         const SizedBox(
                           height: 24,
                         ),
-                        Container(
-                          decoration: const BoxDecoration(
-                            color: Color(0xff55433C),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(20),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: List.generate(
+                              4, // Replace '4' with the number of cards you want to display
+                              (index) => _buildCustomCard1(index),
                             ),
                           ),
-                          constraints: BoxConstraints(
-                            minHeight: 30,
-                            minWidth: 0,
-                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text("Hiiiiiiii"),
-                            ],
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: List.generate(
+                              4, // Replace '4' with the number of cards you want to display
+                              (index) => _buildCustomCard2(index),
+                            ),
                           ),
                         ),
                       ],
@@ -174,6 +178,123 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  IntrinsicWidth _buildCustomCard1(int index) {
+    final cardTexts = [
+      "Coffee",
+      "Beer",
+      "Wine Bar",
+      "Events",
+    ];
+    final cardImages = [
+      "assets/images/coffee.png",
+      "assets/images/beer.png",
+      "assets/images/wine.png",
+      "assets/images/events.png",
+    ];
+
+    return IntrinsicWidth(
+      child: Container(
+        padding: const EdgeInsets.all(8),
+        margin: const EdgeInsets.symmetric(horizontal: 5),
+        height: 35,
+        decoration: const BoxDecoration(
+          color: Color(0xff55433C),
+          borderRadius: BorderRadius.all(
+            Radius.circular(20),
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              cardImages[index],
+              width: 30,
+              height: 30,
+            ),
+            const SizedBox(width: 7),
+            Text(
+              cardTexts[index], // Use the text corresponding to the index
+              style: const TextStyle(
+                color: Colors.white,
+                fontFamily: "Gilroy-Medium",
+                fontSize: 18,
+              ),
+            ),
+            const SizedBox(width: 8),
+          ],
+        ),
+      ),
+    );
+  }
+
+  IntrinsicWidth _buildCustomCard2(int index) {
+    final cardTexts1 = [
+      "Chai Latte",
+      "Matcha Latte",
+      "Red Eye Cold",
+      "Chai Latte",
+    ];
+    final cardTexts2 = [
+      "\$85.00",
+      "\$22.00",
+      "\$60.00",
+      "\$85.00",
+    ];
+    final cardImages = [
+      "assets/images/coffee.png",
+      "assets/images/beer.png",
+      "assets/images/wine.png",
+      "assets/images/events.png",
+    ];
+
+    return IntrinsicWidth(
+      child: Container(
+        padding: const EdgeInsets.all(8),
+        margin: const EdgeInsets.symmetric(horizontal: 5),
+        height: 180,
+        width: 140,
+        decoration: const BoxDecoration(
+          color: Color(0xff55433C),
+          borderRadius: BorderRadius.all(
+            Radius.circular(20),
+          ),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CircleAvatar(
+              backgroundColor: const Color(0xff43332D),
+              radius: 47,
+              child: Image.asset(
+                cardImages[index],
+                width: 30,
+                height: 30,
+              ),
+            ),
+            const SizedBox(height: 12),
+            Text(
+              cardTexts1[index], // Use the text corresponding to the index
+              style: const TextStyle(
+                color: Colors.white,
+                fontFamily: "Gilroy-Bold",
+                fontSize: 18,
+              ),
+            ),
+            const SizedBox(height: 5),
+            Text(
+              cardTexts2[index], // Use the text corresponding to the index
+              style: const TextStyle(
+                color: Colors.white60,
+                fontFamily: "Gilroy-Medium",
+                fontSize: 18,
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -243,7 +364,7 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(
               height: 6,
             ),
-            _buildCustomBarButton("Plugines"),
+            _buildCustomBarButton("Settinges"),
             _buildCustomBarButton("Notifications"),
           ],
         ),
@@ -313,7 +434,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            hintText: 'Search',
+            hintText: 'Coffee shop, beer & wine...',
             border: InputBorder.none,
             hintStyle: const TextStyle(
               color: Color(0xff453731),
