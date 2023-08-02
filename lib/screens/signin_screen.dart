@@ -30,7 +30,6 @@ class SignInScreen extends StatelessWidget {
   void showSnackBar(BuildContext context, String text) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        padding: EdgeInsets.all(5),
         elevation: 5,
         showCloseIcon: true,
         closeIconColor: Colors.white,

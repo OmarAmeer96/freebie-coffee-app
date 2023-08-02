@@ -232,7 +232,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   // Function to validate email format
   bool isValidEmail(String email) {
-    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+    // final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+    final emailRegex =
+        RegExp(r'^[\w-\.]+@(gmail\.com|yahoo\.com|hotmail\.com|outlook\.com)$');
     return emailRegex.hasMatch(email);
   }
 
