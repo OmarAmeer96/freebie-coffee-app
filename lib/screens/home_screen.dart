@@ -2,19 +2,25 @@ import 'package:flutter/material.dart';
 import 'dart:ui';
 
 import 'package:flutter_svg/svg.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 
 // Drawer content widget
-class NavigationDrawer extends StatelessWidget {
+class NavigationDrawer extends StatefulWidget {
   final List<Widget> children;
 
   const NavigationDrawer({Key? key, required this.children}) : super(key: key);
 
   @override
+  State<NavigationDrawer> createState() => _NavigationDrawerState();
+}
+
+class _NavigationDrawerState extends State<NavigationDrawer> {
+  @override
   Widget build(BuildContext context) {
     return Drawer(
       backgroundColor: const Color(0xff55433c),
       child: ListView(
-        children: children,
+        children: widget.children,
       ),
     );
   }
@@ -26,6 +32,7 @@ class HomeScreen extends StatefulWidget {
   static String id = "HomeScreen";
 
   @override
+  // ignore: library_private_types_in_public_api
   _HomeScreenState createState() => _HomeScreenState();
 }
 
@@ -41,142 +48,252 @@ class _HomeScreenState extends State<HomeScreen> {
       key: _scaffoldKey,
       drawer: _buildDrawer(),
       backgroundColor: const Color(0xff55433c),
-      body: SingleChildScrollView(
-        child: GestureDetector(
-          onTap: () {
-            FocusScope.of(context).unfocus();
-          },
-          child: Padding(
-            padding: const EdgeInsets.all(0.0),
-            child: Stack(
-              children: [
-                SizedBox(
-                  width: double.infinity,
-                  child: ColorFiltered(
-                    colorFilter:
-                        const ColorFilter.mode(filterColor, BlendMode.srcATop),
-                    child: Image.asset(
-                      "assets/images/coffee-beans-dark-background-top-view-coffee-concept-banner_1220-6300 1.png",
-                      fit: BoxFit.fill,
-                    ),
+      body: _buildScreenBody(context, filterColor),
+      bottomNavigationBar: Container(
+        color: const Color(0xff221e1c),
+        child: const Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: 14,
+            vertical: 16,
+          ),
+          child: GNav(
+            color: Color(0xff55423d),
+            backgroundColor: Color(0xff221e1c),
+            activeColor: Color(0xff221e1c),
+            tabBackgroundColor: Color(0xff55423d),
+            curve: Curves.bounceIn,
+            iconSize: 25,
+            gap: 8,
+            padding: EdgeInsets.all(10),
+            tabs: [
+              GButton(
+                icon: Icons.home,
+                text: "Home",
+              ),
+              GButton(
+                icon: Icons.favorite_border,
+                text: "Favorites",
+              ),
+              GButton(
+                icon: Icons.search,
+                text: "Search",
+              ),
+              GButton(
+                icon: Icons.settings,
+                text: "Settings",
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  SingleChildScrollView _buildScreenBody(
+      BuildContext context, Color filterColor) {
+    return SingleChildScrollView(
+      child: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(0.0),
+          child: Stack(
+            children: [
+              SizedBox(
+                width: double.infinity,
+                child: ColorFiltered(
+                  colorFilter: ColorFilter.mode(filterColor, BlendMode.srcATop),
+                  child: Image.asset(
+                    "assets/images/coffee-beans-dark-background-top-view-coffee-concept-banner_1220-6300 1.png",
+                    fit: BoxFit.fill,
                   ),
                 ),
-                BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                  child: Container(
-                    color: Colors.transparent,
-                  ),
+              ),
+              BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                child: Container(
+                  color: Colors.transparent,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Center(
-                    child: Column(
-                      children: [
-                        const SizedBox(
-                          height: 60,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Center(
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 60,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            "assets/images/image 2.png",
+                            width: 60,
+                            height: 60,
+                          ),
+                          const Text(
+                            "COFFEE\nTASTE!",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'Gilroy-Bold',
+                              fontSize: 14,
+                              wordSpacing: 2,
+                              letterSpacing: 5,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          _scaffoldKey.currentState?.openDrawer();
+                        },
+                        child: Row(
                           children: [
                             Image.asset(
-                              "assets/images/image 2.png",
-                              width: 60,
-                              height: 60,
+                              "assets/images/Ellipse 38930.png",
+                              width: 55,
+                              height: 55,
                             ),
-                            const Text(
-                              "COFFEE\nTASTE!",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'Gilroy-Bold',
-                                fontSize: 14,
-                                wordSpacing: 2,
-                                letterSpacing: 5,
-                              ),
+                            const Spacer(),
+                            SvgPicture.asset(
+                              "assets/svg/Frame 12614.svg",
+                              width: 9.5,
+                              height: 9.5,
                             ),
                           ],
                         ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            _scaffoldKey.currentState?.openDrawer();
-                          },
-                          child: Row(
-                            children: [
-                              Image.asset(
-                                "assets/images/Ellipse 38930.png",
-                                width: 55,
-                                height: 55,
-                              ),
-                              const Spacer(),
-                              SvgPicture.asset(
-                                "assets/svg/Frame 12614.svg",
-                                width: 9.5,
-                                height: 9.5,
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 24,
-                        ),
-                        const Row(
-                          children: [
-                            Text(
-                              "Hi, ",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 43,
-                                fontFamily: "Gilroy-Regular",
-                              ),
-                            ),
-                            Text(
-                              "Omar",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 43,
-                                fontFamily: "Gilroy-Bold",
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 24,
-                        ),
-                        _buildSearchTextField(),
-                        const SizedBox(
-                          height: 24,
-                        ),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: List.generate(
-                              4, // Replace '4' with the number of cards you want to display
-                              (index) => _buildCustomCard1(index),
+                      ),
+                      const SizedBox(
+                        height: 24,
+                      ),
+                      const Row(
+                        children: [
+                          Text(
+                            "Hi, ",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 43,
+                              fontFamily: "Gilroy-Regular",
                             ),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: List.generate(
-                              4, // Replace '4' with the number of cards you want to display
-                              (index) => _buildCustomCard2(index),
+                          Text(
+                            "Omar",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 43,
+                              fontFamily: "Gilroy-Bold",
                             ),
                           ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 24,
+                      ),
+                      _buildSearchTextField(),
+                      const SizedBox(
+                        height: 24,
+                      ),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: List.generate(
+                            4, // Replace '4' with the number of cards you want to display
+                            (index) => _buildCustomCard1(index),
+                          ),
                         ),
-                      ],
-                    ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const Row(
+                        children: [
+                          SizedBox(
+                            width: 3,
+                          ),
+                          Text(
+                            "Frozen Beverages",
+                            style: TextStyle(
+                              color: Color(0xff6d6b69),
+                              fontSize: 18,
+                              fontFamily: "Gilroy-Medium",
+                            ),
+                          ),
+                          Spacer(),
+                          Text(
+                            "See All",
+                            style: TextStyle(
+                              color: Color(0xff7B665E),
+                              fontSize: 18,
+                              fontFamily: "Gilroy-Medium",
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: List.generate(
+                            4, // Replace '4' with the number of cards you want to display
+                            (index) => _buildCustomCard2(index),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const Row(
+                        children: [
+                          SizedBox(
+                            width: 3,
+                          ),
+                          Text(
+                            "Kava and Bottled Beverages",
+                            style: TextStyle(
+                              color: Color(0xff6d6b69),
+                              fontSize: 18,
+                              fontFamily: "Gilroy-Medium",
+                            ),
+                          ),
+                          Spacer(),
+                          Text(
+                            "See All",
+                            style: TextStyle(
+                              color: Color(0xff7B665E),
+                              fontSize: 18,
+                              fontFamily: "Gilroy-Medium",
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: List.generate(
+                            4, // Replace '4' with the number of cards you want to display
+                            (index) => _buildCustomCard3(index),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
@@ -246,10 +363,10 @@ class _HomeScreenState extends State<HomeScreen> {
       "\$85.00",
     ];
     final cardImages = [
-      "assets/images/coffee.png",
-      "assets/images/beer.png",
-      "assets/images/wine.png",
-      "assets/images/events.png",
+      "assets/images/coffee1.png",
+      "assets/images/coffee2.png",
+      "assets/images/coffee3.png",
+      "assets/images/coffee1.png",
     ];
 
     return IntrinsicWidth(
@@ -272,8 +389,8 @@ class _HomeScreenState extends State<HomeScreen> {
               radius: 47,
               child: Image.asset(
                 cardImages[index],
-                width: 30,
-                height: 30,
+                width: 60,
+                height: 60,
               ),
             ),
             const SizedBox(height: 12),
@@ -293,6 +410,79 @@ class _HomeScreenState extends State<HomeScreen> {
                 fontFamily: "Gilroy-Medium",
                 fontSize: 18,
               ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  IntrinsicWidth _buildCustomCard3(int index) {
+    final cardTexts1 = [
+      "Coffee",
+      "Coffee",
+      "Coffee",
+      "Coffee",
+    ];
+    final cardTexts2 = [
+      "\$85.00",
+      "\$22.00",
+      "\$60.00",
+      "\$85.00",
+    ];
+    final cardImages = [
+      "assets/images/coffee2.png",
+      "assets/images/coffee1.png",
+      "assets/images/coffee2.png",
+      "assets/images/coffee3.png",
+    ];
+
+    return IntrinsicWidth(
+      child: Container(
+        padding: const EdgeInsets.all(8),
+        margin: const EdgeInsets.symmetric(horizontal: 5),
+        height: 125,
+        width: 215,
+        decoration: const BoxDecoration(
+          color: Color(0xff55433C),
+          borderRadius: BorderRadius.all(
+            Radius.circular(20),
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CircleAvatar(
+              backgroundColor: const Color(0xff43332D),
+              radius: 47,
+              child: Image.asset(
+                cardImages[index],
+                width: 60,
+                height: 60,
+              ),
+            ),
+            const SizedBox(width: 20),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  cardTexts1[index], // Use the text corresponding to the index
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontFamily: "Gilroy-Bold",
+                    fontSize: 18,
+                  ),
+                ),
+                const SizedBox(height: 5),
+                Text(
+                  cardTexts2[index], // Use the text corresponding to the index
+                  style: const TextStyle(
+                    color: Colors.white60,
+                    fontFamily: "Gilroy-Medium",
+                    fontSize: 18,
+                  ),
+                ),
+              ],
             ),
           ],
         ),
