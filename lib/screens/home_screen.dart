@@ -49,41 +49,45 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: _buildDrawer(),
       backgroundColor: const Color(0xff55433c),
       body: _buildScreenBody(context, filterColor),
-      bottomNavigationBar: Container(
-        color: const Color(0xff221e1c),
-        child: const Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: 14,
-            vertical: 16,
-          ),
-          child: GNav(
-            color: Color(0xff55423d),
-            backgroundColor: Color(0xff221e1c),
-            activeColor: Color(0xff221e1c),
-            tabBackgroundColor: Color(0xff55423d),
-            curve: Curves.bounceIn,
-            iconSize: 25,
-            gap: 8,
-            padding: EdgeInsets.all(10),
-            tabs: [
-              GButton(
-                icon: Icons.home,
-                text: "Home",
-              ),
-              GButton(
-                icon: Icons.favorite_border,
-                text: "Favorites",
-              ),
-              GButton(
-                icon: Icons.search,
-                text: "Search",
-              ),
-              GButton(
-                icon: Icons.settings,
-                text: "Settings",
-              ),
-            ],
-          ),
+      bottomNavigationBar: buildGNavBar(),
+    );
+  }
+
+  Container buildGNavBar() {
+    return Container(
+      color: const Color(0xff221e1c),
+      child: const Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: 14,
+          vertical: 16,
+        ),
+        child: GNav(
+          color: Color(0xff55423d),
+          backgroundColor: Color(0xff221e1c),
+          activeColor: Color(0xff221e1c),
+          tabBackgroundColor: Color(0xff55423d),
+          curve: Curves.bounceIn,
+          iconSize: 25,
+          gap: 8,
+          padding: EdgeInsets.all(10),
+          tabs: [
+            GButton(
+              icon: Icons.home,
+              text: "Home",
+            ),
+            GButton(
+              icon: Icons.favorite_border,
+              text: "Favorites",
+            ),
+            GButton(
+              icon: Icons.search,
+              text: "Search",
+            ),
+            GButton(
+              icon: Icons.settings,
+              text: "Settings",
+            ),
+          ],
         ),
       ),
     );
